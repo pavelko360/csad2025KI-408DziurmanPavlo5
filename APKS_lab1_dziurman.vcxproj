@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="math_operations.cpp" />
     <ClCompile Include="tests\unit_tests.cpp" />
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
