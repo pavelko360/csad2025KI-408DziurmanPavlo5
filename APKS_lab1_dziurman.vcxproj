@@ -139,6 +139,10 @@
     <ClCompile Include="tests\unit_tests.cpp" />
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ci.bat" />
+    <None Include="ci.sh" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
