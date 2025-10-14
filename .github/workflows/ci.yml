@@ -54,6 +54,7 @@ jobs:
 
       - name: Verify ci.bat exists (Windows)
         if: matrix.os == 'windows-latest'
+        shell: cmd
         run: |
           if not exist ci.bat (
             echo ci.bat not found!
@@ -66,6 +67,7 @@ jobs:
           ./ci.sh
 
       - name: Run build and tests (Windows)
+        shell: cmd
         if: matrix.os == 'windows-latest'
         run: |
           call ci.bat
