@@ -54,7 +54,6 @@ jobs:
 
       - name: Verify ci.bat exists (Windows)
         if: matrix.os == 'windows-latest'
-        shell: bash
         run: |
           if not exist ci.bat (
             echo ci.bat not found!
@@ -69,7 +68,7 @@ jobs:
       - name: Run build and tests (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          dir ci.bat
+          call ci.bat
 
       - name: Deploy
         run: echo "Deploy step (customize as needed)"
