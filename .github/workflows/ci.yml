@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+      - future/**
+  pull_request:
+    branches:
+      - develop
+      - master
+      - future/**
+  workflow_dispatch:
+
+jobs:
+  cross_build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies (Ubuntu)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential gcc g++
+
+      - name: Install dependencies (macOS)
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew update
+          brew install cmake gcc
+
+      - name: Install dependencies (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
+          choco install mingw -y
+
+      - name: Verify ci.sh exists (Linux/macOS)
+        if: matrix.os != 'windows-latest'
+        run: |
+          if [ ! -f ./ci.sh ]; then
+            echo "ci.sh not found!"
+            exit 1
+          fi
+          chmod +x ./ci.sh
+
+      - name: Verify ci.bat exists (Windows)
+        if: matrix.os == 'windows-latest'
+        shell: cmd
+        run: |
+          if not exist ci.bat (
+            echo ci.bat not found!
+            exit /b 1
+          )
+
+      - name: Run build and tests (Linux/macOS)
+        if: matrix.os != 'windows-latest'
+        run: |
+          ./ci.sh
+
+      - name: Run build and tests (Windows)
+        shell: cmd
+        if: matrix.os == 'windows-latest'
+        run: |
+          call ci.bat
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:  
+          name: executables-${{ matrix.os }}
+          path: |
+            build/hello
+            build/unit_tests
+            build/Release/hello.exe
+            build/Release/unit_tests.exe
+
+      - name: Deploy
+        run: echo "Deploy step (customize as needed)"
