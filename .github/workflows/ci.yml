@@ -80,8 +80,8 @@ jobs:
           path: |
             build/hello
             build/unit_tests
-            build/Release/hello.exe
-            build/Release/unit_tests.exe
+            build/Debug/hello.exe
+            build/Debug/unit_tests.exe
 
       - name: Deploy
         run: echo "Deploy step (customize as needed)"
