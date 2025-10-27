@@ -36,6 +36,10 @@
     </None>
     <None Include="ci.sh" />
     <None Include=".github\workflows\ci.yml" />
+    <None Include="baud_gen.vhd" />
+    <None Include="uart_tx.vhd" />
+    <None Include="uart_rx.vhd" />
+    <None Include="uart_tb.vhd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
