@@ -141,12 +141,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".github\workflows\ci.yml" />
-    <None Include="baud_gen.vhd" />
     <None Include="ci.bat" />
     <None Include="ci.sh" />
-    <None Include="uart_rx.vhd" />
-    <None Include="uart_tb.vhd" />
-    <None Include="uart_tx.vhd" />
+    <None Include="i2c_master_tx.vhd" />
+    <None Include="tb_i2c_master.vhd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
